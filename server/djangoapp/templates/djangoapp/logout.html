@@ -1,0 +1,7 @@
+{% extends "djangoapp/index.html" %}
+{% block content %}
+    <h2>You have successfully logged out</h2>
+    <small class="text-muted">
+        <a href="{% url 'djangoapp:login' %}">Login again</a>
+    </small>
+{% endblock %}

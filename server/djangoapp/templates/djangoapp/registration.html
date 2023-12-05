@@ -1,11 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-    <body>
-    <!--Add a registration form here -->
-    </body>
-</html>
+{% extends "djangoapp/index.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <style>fieldset {max-width: fit-content; max-height: fit-content;}</style>
+    <div class="content-section mt-5 d-flex justify-content-end">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-body">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Join today to review dealership</legend>
+                    {{form|crispy}}
+                </fieldset>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already have an account to review dealership?<a class="ml-2" href="{% url 'djangoapp:login' %}">Sign In</a>
+            </small>
+        </div>
+    </div>
+{% endblock %}

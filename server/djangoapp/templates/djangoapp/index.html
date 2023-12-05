@@ -29,18 +29,46 @@
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
-                <div class="nav navbar-nav navbar-right">
-                    <a class="btn btn-link" href="{% url 'djangoapp:about' %}">About Us</a>
-                    <a class="btn btn-link" href="{% url 'djangoapp:contact-us' %}">Contact Us</a>
+                    <div class="nav navbar-nav navbar-right">
+                        <a class="btn btn-link" href="{% url 'djangoapp:about' %}">About Us</a>
+                        <a class="btn btn-link" href="{% url 'djangoapp:contact-us' %}">Contact Us</a>
+                    </div>
                 </div>
+                <div class="navbar-nav">
+                    <a class="navbar-brand mr-4" href="{% url 'djangoapp:login' %}">Dealership Review</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    {% if user.is_authenticated %}
+                        <div class="collapse navbar-collapse" id="navbarToggle">
+                            <div class="nav navbar-nav navbar-right">
+                                <a class="btn btn-link" href="{% url 'djangoapp:about' %}">({{ user.username }})</a>
+                                <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="collapse navbar-collapse" id="navbarToggle">
+                            <a class="btn btn-primary" href="{% url 'djangoapp:login' %}" >Login</a>
+                            <a class="btn btn-link" href="{% url 'djangoapp:register' %}">Sign Up</a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             </nav>
         </header>
 
-        <main role="main" class="container mt-3">
+        <main role="main" class="container mt-5">
             <div class="row">
                 <div class="col-md-11">
+                    <!--messages display logic-->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
                     {% block content %}
 
                     {% endblock %}

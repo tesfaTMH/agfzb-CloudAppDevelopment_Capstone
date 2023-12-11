@@ -1,0 +1,59 @@
+{% extends "djangoapp/index.html" %}
+{% load static %}
+    
+{% block content %}
+
+    <article class="media content-section mt-5 ">
+        <div class="media-body">
+            <table 
+                id="table"
+                data-toggle="table"
+                data-search="true"
+                data-show-export="true"
+                data-filter-control="true"
+                data-filter-control-container="#toolbar"
+                data-click-to-select="true"
+                data-toolbar="#toolbar"
+                class="table table-striped table-dark table-hover table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th data-field="id">ID</th>
+                        <th data-field="name">Dealer Name</th>
+                        <th data-field="city">City</th>
+                        <th data-field="address">Address</th>
+                        <th data-field="zip">Zip</th>
+                        <th data-field="state" data-filter-control="select">
+                            State
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dealer in dealership_list %}
+                        <tr>
+                            <td>{{dealer.id}}</td>
+                            <td class="table-active">
+                                <a href="{% url 'djangoapp:dealer_details' dealer.id %}">
+                                    {{dealer.full_name}}
+                                </a>
+                            </td>
+                            <td>{{dealer.city}}</td>
+                            <td>{{dealer.address}}</td>
+                            <td>{{dealer.zip}}</td>
+                            <td>{{dealer.state}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <script>
+                var $table = $('#table');
+                $(function () {
+                    $('#toolbar').find('select').change(function () {
+                        $table.bootstrapTable('refreshOptions', {
+                            exportDataType: $(this).val()
+                        });
+                    });
+                });
+            </script>
+        </div>
+    </article>
+{% endblock %}

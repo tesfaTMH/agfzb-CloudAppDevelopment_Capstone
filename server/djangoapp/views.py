@@ -13,6 +13,7 @@ import json
 from .forms import UserRegisterForm
 from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, post_review
 from .models import CarMake, CarModel, CarDealer
+from django.views.decorators.csrf import csrf_protect
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -30,6 +31,7 @@ def contact(request):
     return render(request, 'djangoapp/contactus.html')
 
 # Create a `login_request` view to handle sign in request
+@csrf_protect
 def login_request(request):
     context = {}
     if request.method == "POST":
@@ -49,6 +51,7 @@ def login_request(request):
 # ...
 
 # Create a `registration_request` view to handle sign up request
+@csrf_protect
 def registration_request(request):
     form = UserRegisterForm(request.POST or None)
     if request.method == 'POST':
@@ -95,6 +98,7 @@ def get_dealer_details(request, dealer_id):
 
 
 # Create a `add_review` view to submit a review
+@csrf_protect
 def add_review(request, dealer_id):
     if request.method == "GET":
         cars = CarModel.objects.filter(dealerId=dealer_id)

@@ -6,7 +6,7 @@
         <div class="media-body">
             <h1>Add a review for dealer with ID {{dealer_id}}</h1>
             <form action="{% url 'djangoapp:add_review' dealer_id %}" method="post">
-                {% csrf_token %}
+                {% csrf_protect %}
                 <div class="form-group">
                     <label>Enter the review content: </label>
                     <textarea

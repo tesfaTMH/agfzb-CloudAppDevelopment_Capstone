@@ -28,8 +28,9 @@ DEBUG = True
 APPEND_SLASH = True
 
 #ALLOWED_HOSTS = ["localhost"]
-ALLOWED_HOSTS = ["localhost",
-                 "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1",
+    "localhost:8000", "127.0.0.1:8000", "https://hagostesfam-8000.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/"]
+CSRF_TRUSTED_ORIGINS = ["https://hagostesfam-8000.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/"]
 
 
 # Application definition
@@ -135,3 +136,5 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # changing the default user profile route after login
 LOGIN_REDIRECT_URL = 'djangoapp:about' 
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
